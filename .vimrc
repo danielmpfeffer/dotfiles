@@ -18,3 +18,6 @@ let g:vimtex_compiler_method = 'latexmk'
 
 " Show matching parenthesis
 set showmatch
+
+set hlsearch
+set autoindent
