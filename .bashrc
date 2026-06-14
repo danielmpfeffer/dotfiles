@@ -32,3 +32,9 @@ export PATH EDITOR VISUAL PAGER LESS
 
 # Give other users read-only access to most new files  
 umask 022
+
+# Automatically start ssh-agent on login
+if [ -z "$SSH_AUTH_SOCK" ]; then
+    eval "$(ssh-agent -s)"
+    ssh-add ~/.ssh/id_ed25519
+fi
