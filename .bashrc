@@ -23,18 +23,25 @@ HISTSIZE=10000
 HISTFILESIZE=20000
 HISTTIMEFORMAT="%F %T "
 
+# EDITOR and VISUAL determine the editor that programs such as less
 EDITOR=vi
 VISUAL=vi
-PAGER=less
-LESS=meiX
 
+# PAGER is the default text file viewer for programs such as man
+PAGER=less
+
+# These are some handy options for less.
+# LESS=meiX
+alias man='MANWIDTH=75 man'
+
+# Export environment variables.
 export PATH EDITOR VISUAL PAGER LESS
 
 # Give other users read-only access to most new files  
 umask 022
 
-# Automatically start ssh-agent on login
+# Start ssh-agent if not already running
 if [ -z "$SSH_AUTH_SOCK" ]; then
-    eval "$(ssh-agent -s)"
-    ssh-add ~/.ssh/id_ed25519
+    eval $(ssh-agent) > /dev/null
+    ssh-add ~/.ssh/id_ed25519 2>/dev/null
 fi
