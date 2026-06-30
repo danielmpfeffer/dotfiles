@@ -1,6 +1,6 @@
 # Command path
-PATH=/usr/local/bin:/usr/bin:/bin
-PATH=$HOME/bin:$PATH
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin
+PATH=$HOME/.local/bin:$HOME/bin:$PATH
 
 # PS1: \u username \h hostname \w current directory
 # \! history number \s shell name \$ $ if not root
@@ -16,6 +16,17 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
+
+LS_COLORS='di=34:ln=35:ex=31'
+export LS_COLORS
+
+alias ls='ls --color=auto'
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+alias ll='ls -l --color=auto'
+alias la='ls -A'
+alias l='ls -la --color=auto'
 
 # Additions to default config
 # Bigger history with timestamps
@@ -34,14 +45,7 @@ PAGER=less
 # LESS=meiX
 alias man='MANWIDTH=75 man'
 
-# Export environment variables.
-export PATH EDITOR VISUAL PAGER LESS
-
 # Give other users read-only access to most new files  
 umask 022
 
-# Start ssh-agent if not already running
-if [ -z "$SSH_AUTH_SOCK" ]; then
-    eval $(ssh-agent) > /dev/null
-    ssh-add ~/.ssh/id_ed25519 2>/dev/null
-fi
+export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
