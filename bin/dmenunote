@@ -1,0 +1,19 @@
+#!/bin/bash
+
+folder=/home/dan/note/
+
+newnote () { \
+  name="$(echo "" | dmenu -sb "#a3be8c" -nf "#d8dee9" -p "Enter a name: " <&-)"
+  setsid -f xfce4-terminal -x vi $folder$name".txt" >/dev/null 2>&1
+}
+
+selected () {
+  choice=$(echo -e "New\n$(ls -t $folder)" | dmenu -c -l 5 -i -p "Choose note or create new: ")
+  case $choice in
+    New) newnote ;;
+    *txt) setsid -f xfce4-terminal -x vi "$folder$choice" >/dev/null 2>&1 ;; 
+    *) exit ;;
+  esac
+}
+
+selected

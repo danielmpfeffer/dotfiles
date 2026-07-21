@@ -1,0 +1,27 @@
+#!/bin/bash
+# Drop-in replacement for dmenu_run: shows your 10 most recently launched
+# commands first, then falls back to the full $PATH listing for anything
+# else. Accepts the same flags dwm already passes (-c, -l, -fn, colors, etc.)
+# and forwards them straight through to the real dmenu call.
+
+histfile="$HOME/.cache/dmenu_recent"
+mkdir -p "$(dirname "$histfile")"
+touch "$histfile"
+
+# keep the history file from growing forever
+tail -n 500 "$histfile" > "$histfile.tmp" && mv "$histfile.tmp" "$histfile"
+
+# most-recent-first, deduplicated, capped at 10
+recent=$(tac "$histfile" | awk '!seen[$0]++' | head -n 10)
+
+if [ -n "$recent" ]; then
+	rest=$(dmenu_path | grep -vFxf <(printf '%s\n' "$recent"))
+else
+	rest=$(dmenu_path)
+fi
+
+cmd=$(printf '%s\n%s\n' "$recent" "$rest" | dmenu "$@")
+
+[ -n "$cmd" ] || exit 0
+echo "$cmd" >> "$histfile"
+${SHELL:-"/bin/sh"} -c "$cmd" &

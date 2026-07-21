@@ -1,0 +1,4 @@
+Workflow:
+1. Edit ~/.bashrc and ~/.vimrc normally (wherever you're comfortable)
+2. The symlinks ensure they're the same as the versions in ~/dotfiles/
+3. Commit and push from ~/dotfiles/

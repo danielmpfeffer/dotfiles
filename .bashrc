@@ -42,10 +42,10 @@ VISUAL=vi
 PAGER=less
 
 # These are some handy options for less.
-# LESS=meiX
+#LESS=meiX
 alias man='MANWIDTH=75 man'
 
 # Give other users read-only access to most new files  
 umask 022
 
-export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+eval $(keychain --eval --quiet ~/.ssh/id_ed25519)

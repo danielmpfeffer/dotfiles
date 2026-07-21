@@ -1,0 +1,41 @@
+#!/bin/sh
+# dwm autostart — translated from your i3 config's exec/exec_always lines.
+# dwm has no built-in autostart, so this script launches everything, then
+# execs dwm itself.
+
+# XDG autostart .desktop files (matches: exec dex --autostart --environment i3)
+dex --autostart --environment dwm &
+
+# Screen locking on suspend (matches: exec xss-lock ...)
+# slock blocks in the foreground natively, no --nofork-equivalent flag needed.
+xss-lock --transfer-sleep-lock -- slock &
+
+# Network tray icon — NOTE: needs the systray patch on dwm to actually be
+# visible. It'll still run and manage your connection either way.
+nm-applet &
+
+# Multi-monitor setup (matches: exec monitor-setup.sh)
+~/.local/bin/monitor-setup.sh &
+
+# Compositor (matches: exec picom -b)
+picom -b &
+
+# Wallpaper (matches: exec feh --bg-fill ...)
+feh --bg-fill ~/Pictures/wallpaper.jpg &
+
+# Notifications (matches: exec dunst)
+dunst &
+
+# Volume tray icon — same systray caveat as nm-applet above.
+pasystray &
+
+# Permanent night light default (matches: exec xsct 3500)
+xsct 3500 &
+
+# Turn the system bell off (matches: exec xset b off)
+xset b off &
+
+# Status bar text — slstatus sets the root window name itself, no piping needed.
+slstatus &
+
+exec dwm
