@@ -71,7 +71,7 @@ static const char *dmenucmd[] = { "/home/dan/.local/bin/dmenu-recent", "-c", "-l
  * i3 package. Defaulting to st since that's what I suggested building
  * early on; if you skipped that step, swap this for "xterm" or whatever
  * terminal you actually have installed. */
-static const char *termcmd[]  = { "st", NULL };
+static const char *termcmd[]  = { "xfce4-terminal", NULL };
 
 static const Key keys[] = {
 	/* ---- stock dwm defaults, unchanged ---- */
