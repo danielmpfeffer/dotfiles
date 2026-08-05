@@ -111,7 +111,7 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_q,                      quit,           {0} },
 
 	/* ---- extras: your scripts, no vanilla equivalent exists ---- */
-	{ MODKEY,                       XK_o,                      spawn,          SHCMD("~/.local/bin/dmenu-open.sh") },
+	{ MODKEY,                       XK_o,                      spawn,          SHCMD("~/.local/bin/dmenu-open") },
 	{ MODKEY,                       XK_n,                      spawn,          SHCMD("~/.local/bin/dmenunote") },
 	{ MODKEY,                       XK_F7,                     spawn,          SHCMD("~/.local/bin/monitor-setup.sh") },
 	{ MODKEY,                       XK_F8,                     spawn,          SHCMD("xrandr --output eDP --primary --mode 1920x1080 --output HDMI-A-0 --off") },
