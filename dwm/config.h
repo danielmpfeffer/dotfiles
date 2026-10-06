@@ -33,7 +33,7 @@ static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 static const Rule rules[] = {
 	/* class         instance    title       tags mask     isfloating   isterminal   noswallow   monitor */
 	{ "Gimp",        NULL,       NULL,       0,            1,           0,           0,          -1 },
-	{ "xterm-256color", NULL,       NULL,       0,            0,           1,           0,          -1 },
+	{ "Alacritty",   NULL,       NULL,       0,            0,           1,           0,          -1 },
 };
 
 /* layout(s) — stock defaults, stock order */
@@ -67,11 +67,7 @@ static char dmenumon[2] = "0";
 static const char *dmenucmd[] = { "/home/dan/.local/bin/dmenu-recent", "-c", "-l", "10", "-m", dmenumon, "-fn", dmenufont,
 	"-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 
-/* Hardcoded now that i3 is going away — i3-sensible-terminal lived in the
- * i3 package. Defaulting to st since that's what I suggested building
- * early on; if you skipped that step, swap this for "xterm" or whatever
- * terminal you actually have installed. */
-static const char *termcmd[]  = { "xfce4-terminal", NULL };
+static const char *termcmd[]  = { "alacritty", NULL };
 
 static const Key keys[] = {
 	/* ---- stock dwm defaults, unchanged ---- */

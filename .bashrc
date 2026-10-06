@@ -49,3 +49,5 @@ alias man='MANWIDTH=75 man'
 umask 022
 
 eval $(keychain --eval --quiet ~/.ssh/id_ed25519)
+export PLAN9="$HOME/plan9/plan9port"
+export PATH="$PLAN9/bin:$PATH"

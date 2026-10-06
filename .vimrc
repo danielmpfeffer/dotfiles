@@ -1,6 +1,7 @@
 set nocompatible
 syntax on
 filetype plugin indent on
+set background=dark
 set mouse=a
 set number
 set tabstop=4 
@@ -15,5 +16,4 @@ let g:vimtex_compiler_latexmk_engines = {
     \}
 " Show matching parenthesis
 set showmatch
-set hlsearch
 set autoindent
