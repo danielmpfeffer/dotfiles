@@ -69,6 +69,11 @@ static const char *dmenucmd[] = { "/home/dan/.local/bin/dmenu-recent", "-c", "-l
 
 static const char *termcmd[]  = { "alacritty", NULL };
 
+/* clipboard history; clipmenu passes these args on to dmenu. No -m: dwm only
+ * updates dmenumon for dmenucmd, so dmenu picks the focused monitor itself */
+static const char *clipcmd[]  = { "/home/dan/.local/bin/clipmenu", "-c", "-fn", dmenufont,
+	"-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
+
 static const Key keys[] = {
 	/* ---- stock dwm defaults, unchanged ---- */
 	{ MODKEY,                       XK_p,                      spawn,          {.v = dmenucmd } },
@@ -109,6 +114,7 @@ static const Key keys[] = {
 	/* ---- extras: your scripts, no vanilla equivalent exists ---- */
 	{ MODKEY,                       XK_o,                      spawn,          SHCMD("~/.local/bin/dmenu-open") },
 	{ MODKEY,                       XK_n,                      spawn,          SHCMD("~/.local/bin/dmenunote") },
+	{ MODKEY,                       XK_v,                      spawn,          {.v = clipcmd } },
 	{ MODKEY,                       XK_F7,                     spawn,          SHCMD("~/.local/bin/monitor-setup.sh") },
 	{ MODKEY,                       XK_F8,                     spawn,          SHCMD("xrandr --output eDP --primary --mode 1920x1080 --output HDMI-A-0 --off") },
 	{ MODKEY,                       XK_F9,                     spawn,          SHCMD("xsct 2700") },

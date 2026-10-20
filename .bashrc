@@ -66,3 +66,23 @@ umask 022
 eval $(keychain --eval --quiet ~/.ssh/id_ed25519)
 
 [ -f "/home/dan/.ghcup/env" ] && . "/home/dan/.ghcup/env" # ghcup-env
+
+# Pause clipmenu while `pass -c` copies a password, so it never lands in the
+# clipboard history. Refuses to copy if clipmenud is running but won't pause.
+pass() {
+  local arg
+  for arg; do
+    case $arg in
+    -c*|--clip*)
+      if pgrep -xu "$USER" clipmenud >/dev/null; then
+        clipctl disable || return
+        command pass "$@"
+        local ret=$?
+        clipctl enable
+        return $ret
+      fi
+      ;;
+    esac
+  done
+  command pass "$@"
+}

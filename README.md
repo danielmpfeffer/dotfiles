@@ -11,6 +11,7 @@ Bash shell configuration with:
 - Completion support
 - Preferred editors: `vi`, `less` pager
 - Custom PATH including `~/bin`
+- `pass -c` pauses clipmenu so copied passwords stay out of clipboard history
 
 ### `.vimrc`
 Vim configuration with:

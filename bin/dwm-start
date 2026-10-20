@@ -3,6 +3,11 @@
 # dwm has no built-in autostart, so this script launches everything, then
 # execs dwm itself.
 
+# The display manager doesn't read ~/.profile, so add the personal bin dirs
+# here — dwm and everything it launches inherit this (clipmenu needs
+# ~/.local/bin to find clipserve, and dmenu-recent lists what's on PATH).
+export PATH="$HOME/.local/bin:$HOME/bin:$PATH"
+
 # Load X resources (xterm colors, etc.) — fast, nothing else depends on
 # timing here, so it runs first and unbackgrounded rather than with a &
 # like everything below.
@@ -33,6 +38,9 @@ feh --bg-fill ~/Pictures/debian13-wallpaper.png &
 
 # Notifications (matches: exec dunst)
 dunst &
+
+# Clipboard history daemon — Super+v (clipmenu) shows what it has saved.
+~/.local/bin/clipmenud &
 
 # Volume tray icon — same systray caveat as nm-applet above.
 pasystray &
