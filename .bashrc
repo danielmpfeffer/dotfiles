@@ -1,6 +1,21 @@
-# Command path
-PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin
-PATH=$HOME/.local/bin:$HOME/bin:$PATH
+# Non-login terminals may not inherit the paths set in ~/.profile.
+# Add missing system directories without moving them ahead of active tools.
+for _dan_path_dir in /usr/local/sbin /usr/local/bin /usr/sbin /usr/bin; do
+    case ":${PATH-}:" in
+        *:"$_dan_path_dir":*) ;;
+        *) PATH="${PATH:+$PATH:}$_dan_path_dir" ;;
+    esac
+done
+unset _dan_path_dir
+
+for _dan_path_dir in "$HOME/bin" "$HOME/.local/bin"; do
+    case ":${PATH-}:" in
+        *:"$_dan_path_dir":*) ;;
+        *) PATH="$_dan_path_dir${PATH:+:$PATH}" ;;
+    esac
+done
+unset _dan_path_dir
+export PATH
 
 # PS1: \u username \h hostname \w current directory
 # \! history number \s shell name \$ $ if not root
@@ -49,5 +64,5 @@ alias man='MANWIDTH=75 man'
 umask 022
 
 eval $(keychain --eval --quiet ~/.ssh/id_ed25519)
-export PLAN9="$HOME/plan9/plan9port"
-export PATH="$PLAN9/bin:$PATH"
+
+[ -f "/home/dan/.ghcup/env" ] && . "/home/dan/.ghcup/env" # ghcup-env

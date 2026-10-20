@@ -23,4 +23,8 @@ file=$(printf '%s\n%s\n' "$recent" "$rest" | dmenu -c -l 20 -i -p "Open:")
 
 [ -n "$file" ] || exit 0
 echo "$file" >> "$histfile"
-xdg-open "$file"
+
+case "$file" in
+	*.md|*.markdown) alacritty -e glow -p "$file" & ;;
+	*) xdg-open "$file" ;;
+esac

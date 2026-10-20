@@ -33,7 +33,8 @@ Scripts referenced by `dwm/config.h` and `dwm-start`'s autostart list:
   picom/slstatus/slock/etc. then execs dwm
 - `dmenu-recent` — drop-in `dmenu_run` replacement showing the 10 most
   recently launched commands first
-- `dmenu-open.sh` — file picker via dmenu, same recent-first behavior
+- `dmenu-open` — file picker via dmenu, same recent-first behavior;
+  Markdown files open in `glow` instead of `xdg-open`
 - `dmenunote`, `monitor-setup.sh` — personal utility scripts
 
 ## Installation

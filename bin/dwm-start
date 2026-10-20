@@ -3,6 +3,11 @@
 # dwm has no built-in autostart, so this script launches everything, then
 # execs dwm itself.
 
+# Load X resources (xterm colors, etc.) — fast, nothing else depends on
+# timing here, so it runs first and unbackgrounded rather than with a &
+# like everything below.
+xrdb -merge ~/.Xresources
+
 # XDG autostart .desktop files (matches: exec dex --autostart --environment i3)
 dex --autostart --environment dwm &
 
@@ -20,8 +25,11 @@ nm-applet &
 # Compositor (matches: exec picom -b)
 picom -b &
 
-# Wallpaper (matches: exec feh --bg-fill ...)
-feh --bg-fill ~/Pictures/wallpaper.jpg &
+
+# Wallpaper — Debian 13's actual default ("Ceratopsian" theme), converted
+# from the package's SVG to a personal PNG copy so feh doesn't depend on
+# its SVG loader plugin being present.
+feh --bg-fill ~/Pictures/debian13-wallpaper.png &
 
 # Notifications (matches: exec dunst)
 dunst &
