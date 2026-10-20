@@ -1,21 +1,15 @@
-# Non-login terminals may not inherit the paths set in ~/.profile.
-# Add missing system directories without moving them ahead of active tools.
-for _dan_path_dir in /usr/local/sbin /usr/local/bin /usr/sbin /usr/bin; do
-    case ":${PATH-}:" in
-        *:"$_dan_path_dir":*) ;;
-        *) PATH="${PATH:+$PATH:}$_dan_path_dir" ;;
-    esac
-done
-unset _dan_path_dir
-
-for _dan_path_dir in "$HOME/bin" "$HOME/.local/bin"; do
-    case ":${PATH-}:" in
-        *:"$_dan_path_dir":*) ;;
-        *) PATH="$_dan_path_dir${PATH:+:$PATH}" ;;
-    esac
-done
-unset _dan_path_dir
-export PATH
+# Add a dir to PATH unless it's already there; never reorders, so an active
+# venv or nix profile stays in front. System dirs go last, personal ones first.
+path_add() {
+  case ":$PATH:" in
+    *":$1:"*) ;;
+    *) if [ "$2" = after ]; then PATH="${PATH:+$PATH:}$1"; else PATH="$1${PATH:+:$PATH}"; fi ;;
+  esac
+}
+for d in /usr/local/sbin /usr/local/bin /usr/sbin /usr/bin; do path_add "$d" after; done
+path_add ~/bin
+path_add ~/.local/bin
+unset -f path_add; unset d
 
 # PS1: \u username \h hostname \w current directory
 # \! history number \s shell name \$ $ if not root
