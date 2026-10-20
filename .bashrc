@@ -48,6 +48,12 @@ alias l='ls -la --color=auto'
 HISTSIZE=10000
 HISTFILESIZE=20000
 HISTTIMEFORMAT="%F %T "
+# Append each command to the history file as soon as it runs, instead of each
+# shell overwriting the file when it exits (which lost other terminals' history)
+shopt -s histappend
+PROMPT_COMMAND="history -a${PROMPT_COMMAND:+; $PROMPT_COMMAND}"
+# Skip repeated commands, and commands typed with a leading space
+HISTCONTROL=ignoreboth
 
 # EDITOR and VISUAL determine the editor that programs such as less
 EDITOR=vi

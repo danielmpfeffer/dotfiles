@@ -7,7 +7,8 @@ Personal configuration files for bash and vim.
 ### `.bashrc`
 Bash shell configuration with:
 - Custom prompt (blue directory name)
-- Expanded history with timestamps (10,000 entries)
+- Expanded history with timestamps (10,000 entries), appended by every
+  terminal as each command runs
 - Completion support
 - Preferred editors: `vi`, `less` pager
 - Custom PATH including `~/bin`
