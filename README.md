@@ -13,6 +13,8 @@ Bash shell configuration with:
 - Preferred editors: `vi`, `less` pager
 - Custom PATH including `~/bin`
 - `pass -c` pauses clipmenu so copied passwords stay out of clipboard history
+- A startup warning when one of `install.sh`'s symlinks has been replaced by
+  a regular file
 
 ### `.vimrc`
 Vim configuration with:

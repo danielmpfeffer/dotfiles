@@ -92,3 +92,19 @@ pass() {
   done
   command pass "$@"
 }
+
+# Warn when one of install.sh's symlinks has been replaced by a regular file
+# (sed -i, installers and AI agents do this), since edits then stop reaching
+# ~/dotfiles. Diff the two copies before re-linking, or the live edits are lost.
+for _dot in ~/dotfiles/.[!.]* ~/dotfiles/bin/* ~/dotfiles/*/config.h; do
+  case ${_dot#"$HOME"/dotfiles/} in
+    .git*) continue ;;
+    bin/*) _live=~/.local/bin/${_dot##*/} ;;
+    */config.h) _live=~/src/suckless/${_dot#"$HOME"/dotfiles/} ;;
+    *) _live=~/${_dot##*/} ;;
+  esac
+  if [ -e "$_live" ] && [ ! -L "$_live" ]; then
+    echo "dotfiles: $_live is a regular file, not a symlink (diff it against $_dot before re-linking)" >&2
+  fi
+done
+unset _dot _live
