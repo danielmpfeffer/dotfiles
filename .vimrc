@@ -26,3 +26,24 @@ let g:vimtex_compiler_method = 'latexmk'
 let g:vimtex_compiler_latexmk_engines = {
     \ '_' : '-lualatex',
     \}
+
+" Tab completion and pairs (From: F.A.Q & Common Issues)
+function! CheckBackspace() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1] =~# '\s'
+endfunction
+ 
+function! NextCharIsPair() abort
+  return index([')', ']', '}', '>', "'", '"', '`'], getline('.')[col('.') - 1]) >= 0
+endfunction
+ 
+inoremap <silent><expr> <Tab>
+  \ coc#pum#visible() ? coc#pum#select_confirm() :
+  \ coc#inline#visible() ? coc#inline#accept() :
+  \ coc#expandableOrJumpable() ?
+  \ "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+  \ NextCharIsPair() ? "\<Right>" :
+  \ CheckBackspace() ? "\<Tab>" :
+  \ coc#refresh()
+ 
+let g:coc_snippet_next = '<Tab>'
