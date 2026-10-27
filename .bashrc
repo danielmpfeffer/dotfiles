@@ -102,3 +102,6 @@ for _dot in ~/dotfiles/.[!.]* ~/dotfiles/bin/* ~/dotfiles/*/config.h; do
   fi
 done
 unset _dot _live
+
+# opencode
+export PATH=/home/dan/.opencode/bin:$PATH
